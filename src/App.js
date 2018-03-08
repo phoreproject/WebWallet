@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import TransactionsList from './TransactionsList';
 import Settings from './Settings';
 import Masternodes from './Masternodes';
@@ -7,6 +6,7 @@ import Pricetag from './Pricetag';
 import Overview from './Overview';
 import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom';
 
+import logo from './images/phore.png';
 import './styles/styles.css';
 
 class App extends Component {
@@ -177,16 +177,9 @@ class App extends Component {
           <title id="title">Phore Wallet</title>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:300,500" rel="stylesheet" />
-          <link rel="stylesheet" href="styles.css" />
-          {/* <div class='titlebar ' style="-webkit-app-region: drag"> ELECTRON ONLY
-      <p id='titleMain'>Test</p>
-      <div>
-        <span id='minimize'>-</span><span id='maximize' onclick='Window.maximize()'>+</span><span id='close' onclick='Window.close()'>x</span>
-      </div>
-    </div> */}
           <div className="navigation">
             <ul>
-              <li id="phore"><img src="images/phore.png" width="70px" /></li>
+              <li id="phore"><img src={logo} width="70px" /></li>
               <Link to="/overview"><li href="#overview" className="nav nav-active"><i className="fa fa-home" aria-hidden="true" /><p>Overview</p></li></Link>
               <Link to="/pricetag"><li href="#pricetag" className="nav"><i className="fa fa-tag" aria-hidden="true" /><p>Pricetag</p></li></Link>
               <li href="#exchanges" className="nav"><i className="fa fa-exchange" aria-hidden="true" /><p>Exchanges</p></li> {/* <img src='images/pricetag.png' width='45px'/> */}

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import TransactionsList from './TransactionsList';
+import Settings from './Settings';
+import Masternodes from './Masternodes';
+import Pricetag from './Pricetag';
+import Overview from './Overview';
+import { BrowserRouter, Link, Route, Switch, Redirect } from 'react-router-dom';
+
 import './styles/styles.css';
 
 class App extends Component {
@@ -162,354 +169,49 @@ class App extends Component {
 
   }
   render() {
+
     return (
-      <div>
-        <meta charSet="UTF-8" />
-        <title id="title">Phore Wallet</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:300,500" rel="stylesheet" />
-        <link rel="stylesheet" href="styles.css" />
-        {/* <div class='titlebar ' style="-webkit-app-region: drag"> ELECTRON ONLY
+      <BrowserRouter>
+        <div>
+          <meta charSet="UTF-8" />
+          <title id="title">Phore Wallet</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:300,500" rel="stylesheet" />
+          <link rel="stylesheet" href="styles.css" />
+          {/* <div class='titlebar ' style="-webkit-app-region: drag"> ELECTRON ONLY
       <p id='titleMain'>Test</p>
       <div>
         <span id='minimize'>-</span><span id='maximize' onclick='Window.maximize()'>+</span><span id='close' onclick='Window.close()'>x</span>
       </div>
     </div> */}
-        <div className="navigation">
-          <ul>
-            <li id="phore"><img src="images/phore.png" width="70px" /></li>
-            <li href="#overview" className="nav nav-active"><i className="fa fa-home" aria-hidden="true" /><p>Overview</p></li>
-            <li href="#pricetag" className="nav"><i className="fa fa-tag" aria-hidden="true" /><p>Pricetag</p></li> {/* <img src='images/pricetag.png' width='45px'/> */}
-            <li href="#exchanges" className="nav"><i className="fa fa-exchange" aria-hidden="true" /><p>Exchanges</p></li> {/* <img src='images/pricetag.png' width='45px'/> */}
-            <li href="#privacy" className="nav"><i className="fa fa-eye-slash" aria-hidden="true" /><p>Privacy</p></li>
-            <li href="#masternodes" className="nav"><i className="fa fa-server" aria-hidden="true" /><p>Masternodes</p></li>
-            <li href="#settings" className="nav"><i className="fa fa-cog" aria-hidden="true" /><p>Settings</p></li>
-          </ul>
-        </div>
-        <div className="body" id="overview">
-          <div className="two-column">
-            <div className="body-heading">
-              Overview
-            </div>
-            <div className="column leftColumn">
-              <div className="balance total">
-                <p>Total Balance </p>
-                <p className="totalValue">143168.4823<span>PHR</span></p>
-                <p className="unconfirmedValue">61334.122 Unconfirmed</p>
+          <div className="navigation">
+            <ul>
+              <li id="phore"><img src="images/phore.png" width="70px" /></li>
+              <Link to="/overview"><li href="#overview" className="nav nav-active"><i className="fa fa-home" aria-hidden="true" /><p>Overview</p></li></Link>
+              <Link to="/pricetag"><li href="#pricetag" className="nav"><i className="fa fa-tag" aria-hidden="true" /><p>Pricetag</p></li></Link>
+              <li href="#exchanges" className="nav"><i className="fa fa-exchange" aria-hidden="true" /><p>Exchanges</p></li> {/* <img src='images/pricetag.png' width='45px'/> */}
+              <li href="#privacy" className="nav"><i className="fa fa-eye-slash" aria-hidden="true" /><p>Privacy</p></li>
+              <Link to="/masternodes"><li href="#masternodes" className="nav"><i className="fa fa-server" aria-hidden="true" /><p>Masternodes</p></li></Link>
+              <Link to="/settings"><li href="#settings" className="nav"><i className="fa fa-cog" aria-hidden="true" /><p>Settings</p></li></Link>
+            </ul>
+          </div>
+          <Route path="/overview" component={Overview} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/masternodes" component={Masternodes} />
+          <Route path="/pricetag" component={Pricetag} />
+          <div className="footer">
+            <div className="syncing">
+              <div className="progress-bar-main">
+                <div className="progress-bar" />
               </div>
-              <div className="s-and-r active">
-                <button className="movePhore send "><i className="fa fa-arrow-circle-up" aria-hidden="true" /> Send</button>
-                <button className="movePhore receive"><i className="fa fa-arrow-circle-down" aria-hidden="true" /> Receive</button>
-              </div>
-              <div className="balances">
-                <div className="subbalances">
-                </div>
-                <div className="sendPop">
-                  <div className="closeSend">x</div>
-                  <form>
-                    <div className="group addressGroup">
-                      <input type="text" required />
-                      <span className="highlight" />
-                      <span className="bar" />
-                      <label><span className="required">*</span>Address</label>
-                    </div>
-                    <div className="group">
-                      <input type="text" />
-                      <span className="highlight" />
-                      <span className="bar" />
-                      <label>Label</label>
-                    </div>
-                    <div className="group">
-                      <input type="number" required />
-                      <span className="highlight" />
-                      <span className="bar" />
-                      <label><span className="required">*</span>Amount</label>
-                    </div>
-                  </form>
-                  <div className="transactionFee">
-                    <p>Transaction Fee: 0.00010001 PHR/kB</p>
-                    <button className="change">Change</button>
-                  </div>
-                  <div className="final">
-                    <button className="send">Send</button>
-                    <button>Reset</button>
-                  </div>
-                </div>
-                <div className="receivePop">
-                </div>
-              </div>
-            </div>
-            <div className="column rightColumn">
-              <div className="column-title">Transaction History<span href="#">Download as CSV</span></div>
-              <div className="transaction-cont">
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/21/2018 06:46</p>
-                      <p className="amount">-122.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/19/2018 16:39</p>
-                      <p className="amount">+28.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/15/2018 12:23</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/11/2018 08:96</p>
-                      <p className="amount">+38.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/9/2018 09:12 ~ Unconfirmed</p>
-                      <p className="amount">+8.06</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/7/2018 12:12</p>
-                      <p className="amount">-1.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/6/2018 04:44 ~ Unconfirmed</p>
-                      <p className="amount">-100.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/3/2018 08:32</p>
-                      <p className="amount">+28.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/2/2018 02:16</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/11/2018 08:96</p>
-                      <p className="amount">+38.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/9/2018 09:12 ~ Unconfirmed</p>
-                      <p className="amount">+8.06</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/7/2018 12:12</p>
-                      <p className="amount">-1.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/6/2018 04:44 ~ Unconfirmed</p>
-                      <p className="amount">-100.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/3/2018 08:32</p>
-                      <p className="amount">+28.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/2/2018 02:16</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/11/2018 08:96</p>
-                      <p className="amount">+38.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/9/2018 09:12 ~ Unconfirmed</p>
-                      <p className="amount">+8.06</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/7/2018 12:12</p>
-                      <p className="amount">-1.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/6/2018 04:44 ~ Unconfirmed</p>
-                      <p className="amount">-100.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/3/2018 08:32</p>
-                      <p className="amount">+28.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/2/2018 02:16</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/2/2018 02:16</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/11/2018 08:96</p>
-                      <p className="amount">+38.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/9/2018 09:12 ~ Unconfirmed</p>
-                      <p className="amount">+8.06</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/7/2018 12:12</p>
-                      <p className="amount">-1.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction unconfirmed sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/6/2018 04:44 ~ Unconfirmed</p>
-                      <p className="amount">-100.00</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-                <div className="transaction received">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/3/2018 08:32</p>
-                      <p className="amount">+28.36</p>
-                    </div>
-                    <p className="address">From: Unknown</p>
-                  </div>
-                </div>
-                <div className="transaction sent">
-                  <div className="transaction-info">
-                    <div className="primary-info">
-                      <p className="date">1/2/2018 02:16</p>
-                      <p className="amount">-8.20</p>
-                    </div>
-                    <p className="address">To: PKdHpwcMMn55kKpY6HzHXB8roXT9jcbLSg</p>
-                  </div>
-                </div>
-              </div>
+              Synchronizing
+          </div>
+            <div className="network-status">
+              <span>PHR </span><i className="phore"><img src="images/phore.png" height="14px" /></i><i className="fa fa-rss" aria-hidden="true" /><i className="fa fa-check network" aria-hidden="true" />
             </div>
           </div>
         </div>
-        <div className="footer">
-          <div className="syncing">
-            <div className="progress-bar-main">
-              <div className="progress-bar" />
-            </div>
-            Synchronizing
-          </div>
-          <div className="network-status">
-            <span>PHR </span><i className="phore"><img src="images/phore.png" height="14px" /></i><i className="fa fa-rss" aria-hidden="true" /><i className="fa fa-check network" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

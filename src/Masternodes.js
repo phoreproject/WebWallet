@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-export class Masternodes extends Component {
+export default class Masternodes extends Component {
   render() {
-    
+    return <div />
   }
 }

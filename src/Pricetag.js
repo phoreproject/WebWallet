@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-export class Pricetag extends Component {
+export default class Pricetag extends Component {
   render() {
-    <div className="body" id="pricetag">
+    return <div className="body" id="pricetag">
       <div className="body-heading">
         Pricetag
           </div>

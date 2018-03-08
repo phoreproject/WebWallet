@@ -680,6 +680,10 @@ body {
   border-bottom: 2px solid rgba(50,50,50,0.1);
 }
 
+a {
+  text-decoration: none;
+}
+
 .exchanges {
   padding-left: 35px;
 }

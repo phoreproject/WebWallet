@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-export class Settings extends Component {
+export default class Settings extends Component {
   render() {
-    <div className="body" id="settings">
+    return <div className="body" id="settings">
       <div className="body-heading">
         Settings
           </div>
